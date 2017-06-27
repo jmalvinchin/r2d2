@@ -60,7 +60,7 @@ class RobotGeneral
 
   def move_robot
     x_pos, y_pos = @robot.calculate_move
-    if @table.within_x_range(x_pos) && @table.within_y_range(y_pos)
+    if @table.within_table_bounds(x_pos, y_pos)
       @robot.move(x_pos, y_pos)
     else
       puts "Robot will be out of bounds"
@@ -68,9 +68,7 @@ class RobotGeneral
   end
 
   def valid_place_params?(x_position, y_position, face)
-    @table.within_x_range(x_position) &&
-      @table.within_y_range(y_position) &&
-      @robot.valid_face?(face)
+    @table.within_table_bounds(x_position, y_position) && @robot.valid_face?(face)
   end
 
   def valid_command?(command)
