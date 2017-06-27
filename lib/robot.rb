@@ -1,5 +1,7 @@
 class Robot
   VALID_FACES = ["NORTH", "EAST", "SOUTH", "WEST"]
+  FACE_DIRECTIONS = { "NORTH" => 1, "EAST" => 2, "SOUTH" => 3, "WEST" => 4 }
+  TURN_DIRECTIONS = { "LEFT" => -1, "RIGHT" => 1 }
   attr_accessor :x_position
   attr_accessor :y_position
   attr_accessor :face
@@ -11,6 +13,20 @@ class Robot
   def move(x, y)
     @x_position = x
     @y_position = y
+    report
+  end
+
+  # Visualize as a map with values assigned to face, then directions will just move the value
+  # 1 to the right or -1 to the left. The % function will bring it back within the range of the face values.
+  # 0 values will be assigned to the WEST since I started with 1 as the North. so 1 = North - 1 LEFT % 4 = 0 which
+  # is WEST. 3 = SOUTH + 1 RIGHT % 4 = 0 si also WEST
+  def rotate(turn)
+    face_value = (FACE_DIRECTIONS[@face] + TURN_DIRECTIONS[turn]) % FACE_DIRECTIONS.length
+    if face_value == 0
+      @face = FACE_DIRECTIONS.key(4)
+    else
+      @face = FACE_DIRECTIONS.key(face_value)
+    end
     report
   end
 

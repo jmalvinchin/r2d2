@@ -38,9 +38,9 @@ class RobotGeneral
       when "MOVE"
         move_robot
       when "LEFT"
-        puts "change the direction the robot is facing to its LEFT"
+        @robot.rotate("LEFT")
       when "RIGHT"
-        puts "change the direction the robot is facing to its RIGHT"
+        @robot.rotate("RIGHT")
       when "REPORT"
         @robot.report
       end
