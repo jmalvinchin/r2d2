@@ -1,5 +1,4 @@
 class Robot
-  VALID_FACES = ["NORTH", "EAST", "SOUTH", "WEST"]
   FACE_DIRECTIONS = { "NORTH" => 1, "EAST" => 2, "SOUTH" => 3, "WEST" => 4 }
   TURN_DIRECTIONS = { "LEFT" => -1, "RIGHT" => 1 }
   attr_accessor :x_position
@@ -11,7 +10,7 @@ class Robot
   end
 
   def valid_face?(face)
-    VALID_FACES.include?(face)
+    FACE_DIRECTIONS.keys.include?(face)
   end
 
   def place_on_position(x, y, face)
