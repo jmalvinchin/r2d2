@@ -36,7 +36,7 @@ class RobotGeneral
       when "PLACE"
         @robot.place_on_position(x_position, y_position, face)
       when "MOVE"
-        move_robot
+        @robot.move
       when "LEFT"
         @robot.rotate("LEFT")
       when "RIGHT"
@@ -50,15 +50,6 @@ class RobotGeneral
   end
 
   private
-
-  def move_robot
-    x_pos, y_pos = @robot.calculate_move
-    if @table.within_table_bounds(x_pos, y_pos)
-      @robot.move(x_pos, y_pos)
-    else
-      puts "Robot will be out of bounds"
-    end
-  end
 
   def valid_command?(command)
     VALID_COMMANDS.include?(command)

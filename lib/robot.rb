@@ -25,6 +25,11 @@ class Robot
     end
   end
 
+  def move
+    x_pos, y_pos = calculate_move
+    place_on_position(x_pos, y_pos, @face) if @table.within_table_bounds(x_pos, y_pos)
+  end
+
   # Visualize as a map with values assigned to face, then directions will just move the value
   # 1 to the right or -1 to the left. The % function will bring it back within the range of the face values.
   # 0 values will be assigned to the WEST since I started with 1 as the North. so 1 = North - 1 LEFT % 4 = 0 which
