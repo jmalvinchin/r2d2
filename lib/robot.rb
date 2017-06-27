@@ -1,12 +1,12 @@
 class Robot
   FACE_DIRECTIONS = { "NORTH" => 1, "EAST" => 2, "SOUTH" => 3, "WEST" => 4 }
   TURN_DIRECTIONS = { "LEFT" => -1, "RIGHT" => 1 }
-  attr_accessor :x_position
-  attr_accessor :y_position
-  attr_accessor :face
 
   def initialize(table)
     @table = table
+    @x_position = nil
+    @y_positon = nil
+    @face = nil
   end
 
   def valid_face?(face)
@@ -25,7 +25,7 @@ class Robot
   end
 
   def is_placed?
-    !x_position.nil?
+    !@x_position.nil?
   end
 
   def move
@@ -54,7 +54,7 @@ class Robot
   def calculate_move
     x_pos = @x_position
     y_pos = @y_position
-    case face
+    case @face
     when "NORTH"
       y_pos += 1
     when "EAST"
