@@ -39,13 +39,13 @@ class Robot
     y_pos = @y_position
     case face
     when "NORTH"
-      x_pos += 1
-    when "EAST"
       y_pos += 1
+    when "EAST"
+      x_pos += 1
     when "SOUTH"
-      x_pos -= 1
-    when "WEST"
       y_pos -= 1
+    when "WEST"
+      x_pos -= 1
     end
 
     return x_pos, y_pos
