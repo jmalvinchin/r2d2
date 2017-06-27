@@ -29,9 +29,9 @@ class RobotGeneral
     cmd, cmd_params = command.split(" ")
     x_position, y_position, face = cmd_params.split(",") if cmd_params
     if @initial_command && cmd == "PLACE"
-      @initial_command = false
       @robot.place_on_position(x_position.to_i, y_position.to_i, face)
-    elsif !@initial_command and valid_command?(cmd)
+      @initial_command = false if @robot.is_placed?
+    elsif !@initial_command && valid_command?(cmd)
       case cmd
       when "PLACE"
         @robot.place_on_position(x_position, y_position, face)

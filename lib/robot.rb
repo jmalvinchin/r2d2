@@ -25,6 +25,10 @@ class Robot
     end
   end
 
+  def is_placed?
+    !x_position.nil?
+  end
+
   def move
     x_pos, y_pos = calculate_move
     place_on_position(x_pos, y_pos, @face) if @table.within_table_bounds(x_pos, y_pos)
