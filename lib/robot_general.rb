@@ -9,7 +9,7 @@ class RobotGeneral
   def initialize
     puts "Hello I'm the Robot General"
     @table = Table.new
-    @robot = Robot.new
+    @robot = Robot.new(@table)
     @initial_command = true
   end
 
@@ -28,13 +28,13 @@ class RobotGeneral
   def execute_command(command)
     cmd, cmd_params = command.split(" ")
     x_position, y_position, face = cmd_params.split(",") if cmd_params
-    if @initial_command && cmd == "PLACE" && valid_place_params?(x_position, y_position, face)
+    if @initial_command && cmd == "PLACE"
       @initial_command = false
-      @robot.move(x_position.to_i, y_position.to_i, face)
+      @robot.place_on_position(x_position.to_i, y_position.to_i, face)
     elsif !@initial_command and valid_command?(cmd)
       case cmd
       when "PLACE"
-        @robot.move(x_position, y_position, face) if valid_place_params?(x_position, y_position, face)
+        @robot.place_on_position(x_position, y_position, face)
       when "MOVE"
         move_robot
       when "LEFT"
@@ -58,10 +58,6 @@ class RobotGeneral
     else
       puts "Robot will be out of bounds"
     end
-  end
-
-  def valid_place_params?(x_position, y_position, face)
-    @table.within_table_bounds(x_position, y_position) && @robot.valid_face?(face)
   end
 
   def valid_command?(command)
