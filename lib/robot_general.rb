@@ -30,11 +30,11 @@ class RobotGeneral
     x_position, y_position, face = cmd_params.split(",") if cmd_params
     if @initial_command && cmd == "PLACE" && valid_place_params?(x_position, y_position, face)
       @initial_command = false
-      place_robot(x_position, y_position , face)
+      @robot.move(x_position.to_i, y_position.to_i, face)
     elsif !@initial_command and valid_command?(cmd)
       case cmd
       when "PLACE"
-        place_robot(x_position, y_position , face) if valid_place_params?(x_position, y_position, face)
+        @robot.move(x_position, y_position, face) if valid_place_params?(x_position, y_position, face)
       when "MOVE"
         move_robot
       when "LEFT"
@@ -47,13 +47,6 @@ class RobotGeneral
     else
       puts "You have used an invalid command. Please check your syntax and try again."
     end
-  end
-
-  def place_robot(x_position, y_position, face)
-    @robot.x_position = x_position.to_i
-    @robot.y_position = y_position.to_i
-    @robot.face = face
-    @robot.report
   end
 
   private

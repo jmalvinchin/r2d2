@@ -10,9 +10,10 @@ class Robot
     VALID_FACES.include?(face)
   end
 
-  def move(x, y)
+  def move(x, y, *face)
     @x_position = x
     @y_position = y
+    @face = face[0] if face.any?
     report
   end
 
