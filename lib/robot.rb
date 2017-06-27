@@ -14,11 +14,11 @@ class Robot
     VALID_FACES.include?(face)
   end
 
-  def place_on_position(x, y, *face)
-    if valid_place_params?(x, y, face[0])
+  def place_on_position(x, y, face)
+    if valid_place_params?(x, y, face)
       @x_position = x
       @y_position = y
-      @face = face[0] if face.any?
+      @face = face
       report
     else
       puts "Robot position/face will be invalid"
