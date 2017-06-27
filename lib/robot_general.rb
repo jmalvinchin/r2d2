@@ -36,13 +36,13 @@ class RobotGeneral
       when "PLACE"
         place_robot(x_position, y_position , face) if valid_place_params?(x_position, y_position, face)
       when "MOVE"
-        puts "MOVE +1"
+        move_robot
       when "LEFT"
         puts "change the direction the robot is facing to its LEFT"
       when "RIGHT"
         puts "change the direction the robot is facing to its RIGHT"
       when "REPORT"
-        puts "output the x,y and direction of robot"
+        @robot.report
       end
     else
       puts "You have used an invalid command. Please check your syntax and try again."
@@ -53,10 +53,19 @@ class RobotGeneral
     @robot.x_position = x_position.to_i
     @robot.y_position = y_position.to_i
     @robot.face = face
-    puts "Your robot is now at X:#{x_position} Y:#{y_position} facing #{face}"
+    @robot.report
   end
 
   private
+
+  def move_robot
+    x_pos, y_pos = @robot.calculate_move
+    if @table.within_x_range(x_pos) && @table.within_y_range(y_pos)
+      @robot.move(x_pos, y_pos)
+    else
+      puts "Robot will be out of bounds"
+    end
+  end
 
   def valid_place_params?(x_position, y_position, face)
     @table.within_x_range(x_position) &&
