@@ -13,11 +13,8 @@ class RobotGeneral
     @initial_command = true
   end
 
-  def hello_message
-    puts "Hi Hello, you may now order around your robot"
-  end
-
   def input_commands
+    puts "You may now order around your robot"
     loop do
       puts "Please Enter a command:"
       @command = gets.chomp
